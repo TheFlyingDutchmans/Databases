@@ -43,13 +43,19 @@ namespace DataBaseAssignment
                                 create1.create(entrieValue);
                                 break;
                             case "R":
-                                databaseMySQLRead();
+                                Console.WriteLine("reading " + entrieValue + " entrie(s)");
+                                SQLRead read1 = new SQLRead();
+                                read1.read(entrieValue);
                                 break;
                             case "U":
-                                Console.WriteLine("You have selected Update");
+                                Console.WriteLine("updating " + entrieValue + " entrie(s)");
+                                SQLUpdate update1 = new SQLUpdate();
+                                update1.update(entrieValue);
                                 break;
                             case "D":
-                                Console.WriteLine("You have selected Delete");
+                                Console.WriteLine("deleting " + entrieValue + " entrie(s)");
+                                SQLDelete delete1 = new SQLDelete();
+                                delete1.delete(entrieValue);
                                 break;
                             case "E":
                                 Environment.Exit(0);
