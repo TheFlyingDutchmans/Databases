@@ -39,8 +39,8 @@ namespace DataBaseAssignment
                         {
                             case "C":
                                 Console.WriteLine("creating " + entrieValue + " entrie(s)");
-                                SQLRead read1 = new SQLRead();
-                                read1.read(entrieValue);
+                                SQLCreate create1 = new SQLCreate();
+                                create1.create(entrieValue);
                                 break;
                             case "R":
                                 databaseMySQLRead();
