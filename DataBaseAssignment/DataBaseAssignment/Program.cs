@@ -28,6 +28,8 @@ namespace DataBaseAssignment
                 switch (choose)
                 {
                     case 1:
+                        int entrieValue = databaseSelectEntries();
+
                         Clear();
                         Console.WriteLine("You have selected MySQL, Enter [C] for Create, [R] for Read, [U] for Update and [D] for Delete. [E] for exit ");
                         //Console.ReadLine();
@@ -36,7 +38,9 @@ namespace DataBaseAssignment
                         switch (answer.ToUpper())
                         {
                             case "C":
-                                databaseMySQLCreate();
+                                Console.WriteLine("creating " + entrieValue + " entrie(s)");
+                                SQLRead read1 = new SQLRead();
+                                read1.read(entrieValue);
                                 break;
                             case "R":
                                 databaseMySQLRead();
@@ -82,8 +86,7 @@ namespace DataBaseAssignment
                 Console.ReadLine();
             }
 
-            //set up mysql CRUD
-            static void databaseMySQLCreate()
+            static int databaseSelectEntries()
             {
                 int choice;
                 Clear();
@@ -92,243 +95,272 @@ namespace DataBaseAssignment
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Making one Entry");
-                        databasemySQLCreateOne();
-                        break;
+                        return 1;
 
                     case 2:
-                        Console.WriteLine("Making one thousand entries");
-                        databasemySQLCreateThousand();
-                        break;
+                        return 1000;
 
                     case 3:
-                        Console.WriteLine("Making one hundred thousand entries");
-                        databasemySQLCreateHundredThousand();
-                        break;
+                        return 100000;
 
                     case 4:
-                        Console.WriteLine("Making one milliion entries");
-                        databasemySQLCreateMillion();
-                        break;
-
-                    case 5:
-                        Environment.Exit(0);
-                        break;
+                        return 1000000;
 
                     default:
                         Console.WriteLine("Invalid entry, try again you must.");
-                        Console.ReadLine();
-                        break;
+                        databaseSelectEntries();
+                        return 0;
                 }
 
-
             }
+
+            ////set up mysql CRUD
+            //static void databaseMySQLCreate()
+            //{
+            //    int choice;
+            //    Clear();
+            //    Console.WriteLine("Enter [1] for 1 entry, [2] for 1.000 entries, [3] for 100.000 entries [4] for 1.000.000 entries");
+            //    choice = Convert.ToInt32(Console.ReadLine());
+            //    switch (choice)
+            //    {
+            //        case 1:
+            //            Console.WriteLine("Making one Entry");
+            //            databasemySQLCreateOne();
+            //            break;
+
+            //        case 2:
+            //            Console.WriteLine("Making one thousand entries");
+            //            databasemySQLCreateThousand();
+            //            break;
+
+            //        case 3:
+            //            Console.WriteLine("Making one hundred thousand entries");
+            //            databasemySQLCreateHundredThousand();
+            //            break;
+
+            //        case 4:
+            //            Console.WriteLine("Making one milliion entries");
+            //            databasemySQLCreateMillion();
+            //            break;
+
+            //        case 5:
+            //            Environment.Exit(0);
+            //            break;
+
+            //        default:
+            //            Console.WriteLine("Invalid entry, try again you must.");
+            //            Console.ReadLine();
+            //            break;
+            //    }
+
+
+            //}
             
-            #region Create
-            static void databasemySQLCreateOne()
-            {
-                string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
+            //#region Create
+            //static void databasemySQLCreateOne()
+            //{
+            //    string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
 
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                MySqlDataAdapter adapter;
+            //    MySqlConnection conn;
+            //    MySqlCommand cmd;
+            //    MySqlDataAdapter adapter;
 
-                conn = new MySqlConnection();
-                cmd = new MySqlCommand();
-                adapter = new MySqlDataAdapter();
+            //    conn = new MySqlConnection();
+            //    cmd = new MySqlCommand();
+            //    adapter = new MySqlDataAdapter();
 
-                conn.ConnectionString = ConnectionString;
-                try
-                {
-
-
-                    Stopwatch stopw = new Stopwatch();
-                    stopw.Start();
-
-                    for (int i = 0; i < 1; i++)
-                    {
-                        conn.Open();
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
-                        //int userID = i;
-                        string firstName = Faker.Name.First();
-                        string lastName = Faker.Name.Last();
-                        /*                        cmd.Parameters.Add("@userID", MySqlDbType.String);
-                                                cmd.Parameters[@userID].Value = userID;*/
-
-                        cmd.Parameters.Add("@firstName", MySqlDbType.String);
-                        cmd.Parameters["@firstName"].Value = firstName;
-
-                        cmd.Parameters.Add("@lastName", MySqlDbType.String);
-                        cmd.Parameters["@lastName"].Value = lastName;
-
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-                    }
-
-                    stopw.Stop();
-                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+            //    conn.ConnectionString = ConnectionString;
+            //    try
+            //    {
 
 
+            //        Stopwatch stopw = new Stopwatch();
+            //        stopw.Start();
 
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            //        for (int i = 0; i < 1; i++)
+            //        {
+            //            conn.Open();
+            //            cmd.Connection = conn;
+            //            cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+            //            //int userID = i;
+            //            string firstName = Faker.Name.First();
+            //            string lastName = Faker.Name.Last();
+            //            /*                        cmd.Parameters.Add("@userID", MySqlDbType.String);
+            //                                    cmd.Parameters[@userID].Value = userID;*/
 
-            static void databasemySQLCreateThousand()
-            {
-                string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
+            //            cmd.Parameters.Add("@firstName", MySqlDbType.String);
+            //            cmd.Parameters["@firstName"].Value = firstName;
 
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                MySqlDataAdapter adapter;
+            //            cmd.Parameters.Add("@lastName", MySqlDbType.String);
+            //            cmd.Parameters["@lastName"].Value = lastName;
 
-                conn = new MySqlConnection();
+            //            cmd.ExecuteNonQuery();
+            //            conn.Close();
+            //        }
 
-
-                conn.ConnectionString = ConnectionString;
-                try
-                {
-
-
-                    Stopwatch stopw = new Stopwatch();
-                    stopw.Start();
-                    conn.Open();
-
-                    for (int i = 0; i < 1000; i++)
-                    {
-                        cmd = new MySqlCommand();
-                        adapter = new MySqlDataAdapter();
-
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
-                        //int userID = i;
-                        string firstName = Faker.Name.First();
-                        string lastName = Faker.Name.Last();
-
-                        cmd.Parameters.Add("@firstName", MySqlDbType.String);
-                        cmd.Parameters["@firstName"].Value = firstName;
-
-                        cmd.Parameters.Add("@lastName", MySqlDbType.String);
-                        cmd.Parameters["@lastName"].Value = lastName;
-
-                        cmd.ExecuteNonQuery();
-                    }
-                    conn.Close();
-
-                    stopw.Stop();
-                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
-
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-            static void databasemySQLCreateHundredThousand()
-            {
-                string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
-
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                MySqlDataAdapter adapter;
-
-                conn = new MySqlConnection();
+            //        stopw.Stop();
+            //        Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
 
 
-                conn.ConnectionString = ConnectionString;
-                try
-                {
+
+            //    }
+            //    catch (MySql.Data.MySqlClient.MySqlException ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
+
+            //static void databasemySQLCreateThousand()
+            //{
+            //    string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
+
+            //    MySqlConnection conn;
+            //    MySqlCommand cmd;
+            //    MySqlDataAdapter adapter;
+
+            //    conn = new MySqlConnection();
 
 
-                    Stopwatch stopw = new Stopwatch();
-                    stopw.Start();
-                    conn.Open();
-
-                    for (int i = 0; i < 100000; i++)
-                    {
-                        cmd = new MySqlCommand();
-                        adapter = new MySqlDataAdapter();
-
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
-                        //int userID = i;
-                        string firstName = Faker.Name.First();
-                        string lastName = Faker.Name.Last();
-
-                        cmd.Parameters.Add("@firstName", MySqlDbType.String);
-                        cmd.Parameters["@firstName"].Value = firstName;
-
-                        cmd.Parameters.Add("@lastName", MySqlDbType.String);
-                        cmd.Parameters["@lastName"].Value = lastName;
-
-                        cmd.ExecuteNonQuery();
-                    }
-                    conn.Close();
-
-                    stopw.Stop();
-                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
-
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-            static void databasemySQLCreateMillion()
-            {
-                string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
-
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                MySqlDataAdapter adapter;
-
-                conn = new MySqlConnection();
+            //    conn.ConnectionString = ConnectionString;
+            //    try
+            //    {
 
 
-                conn.ConnectionString = ConnectionString;
-                try
-                {
-                    Stopwatch stopw = new Stopwatch();
-                    stopw.Start();
-                    conn.Open();
+            //        Stopwatch stopw = new Stopwatch();
+            //        stopw.Start();
+            //        conn.Open();
 
-                    for (int i = 0; i < 1000000; i++)
-                    {
-                        cmd = new MySqlCommand();
-                        adapter = new MySqlDataAdapter();
+            //        for (int i = 0; i < 1000; i++)
+            //        {
+            //            cmd = new MySqlCommand();
+            //            adapter = new MySqlDataAdapter();
 
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
-                        //int userID = i;
-                        string firstName = Faker.Name.First();
-                        string lastName = Faker.Name.Last();
+            //            cmd.Connection = conn;
+            //            cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+            //            //int userID = i;
+            //            string firstName = Faker.Name.First();
+            //            string lastName = Faker.Name.Last();
 
-                        cmd.Parameters.Add("@firstName", MySqlDbType.String);
-                        cmd.Parameters["@firstName"].Value = firstName;
+            //            cmd.Parameters.Add("@firstName", MySqlDbType.String);
+            //            cmd.Parameters["@firstName"].Value = firstName;
 
-                        cmd.Parameters.Add("@lastName", MySqlDbType.String);
-                        cmd.Parameters["@lastName"].Value = lastName;
+            //            cmd.Parameters.Add("@lastName", MySqlDbType.String);
+            //            cmd.Parameters["@lastName"].Value = lastName;
 
-                        cmd.ExecuteNonQuery();
-                    }
-                    conn.Close();
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //        conn.Close();
 
-                    stopw.Stop();
-                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+            //        stopw.Stop();
+            //        Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
 
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            #endregion
+            //    }
+            //    catch (MySql.Data.MySqlClient.MySqlException ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
+
+            //static void databasemySQLCreateHundredThousand()
+            //{
+            //    string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
+
+            //    MySqlConnection conn;
+            //    MySqlCommand cmd;
+            //    MySqlDataAdapter adapter;
+
+            //    conn = new MySqlConnection();
+
+
+            //    conn.ConnectionString = ConnectionString;
+            //    try
+            //    {
+
+
+            //        Stopwatch stopw = new Stopwatch();
+            //        stopw.Start();
+            //        conn.Open();
+
+            //        for (int i = 0; i < 100000; i++)
+            //        {
+            //            cmd = new MySqlCommand();
+            //            adapter = new MySqlDataAdapter();
+
+            //            cmd.Connection = conn;
+            //            cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+            //            //int userID = i;
+            //            string firstName = Faker.Name.First();
+            //            string lastName = Faker.Name.Last();
+
+            //            cmd.Parameters.Add("@firstName", MySqlDbType.String);
+            //            cmd.Parameters["@firstName"].Value = firstName;
+
+            //            cmd.Parameters.Add("@lastName", MySqlDbType.String);
+            //            cmd.Parameters["@lastName"].Value = lastName;
+
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //        conn.Close();
+
+            //        stopw.Stop();
+            //        Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+
+            //    }
+            //    catch (MySql.Data.MySqlClient.MySqlException ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
+
+            //static void databasemySQLCreateMillion()
+            //{
+            //    string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
+
+            //    MySqlConnection conn;
+            //    MySqlCommand cmd;
+            //    MySqlDataAdapter adapter;
+
+            //    conn = new MySqlConnection();
+
+
+            //    conn.ConnectionString = ConnectionString;
+            //    try
+            //    {
+            //        Stopwatch stopw = new Stopwatch();
+            //        stopw.Start();
+            //        conn.Open();
+
+            //        for (int i = 0; i < 1000000; i++)
+            //        {
+            //            cmd = new MySqlCommand();
+            //            adapter = new MySqlDataAdapter();
+
+            //            cmd.Connection = conn;
+            //            cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+            //            //int userID = i;
+            //            string firstName = Faker.Name.First();
+            //            string lastName = Faker.Name.Last();
+
+            //            cmd.Parameters.Add("@firstName", MySqlDbType.String);
+            //            cmd.Parameters["@firstName"].Value = firstName;
+
+            //            cmd.Parameters.Add("@lastName", MySqlDbType.String);
+            //            cmd.Parameters["@lastName"].Value = lastName;
+
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //        conn.Close();
+
+            //        stopw.Stop();
+            //        Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+
+            //    }
+            //    catch (MySql.Data.MySqlClient.MySqlException ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
+            //#endregion
 
             #region Read
             static void databaseMySQLRead()
