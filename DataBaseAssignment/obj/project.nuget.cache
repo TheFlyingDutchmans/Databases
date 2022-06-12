@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kWY1Ogh37BCOVPPqsz2daTALcbb3QFstJSNeQTyGsGL9n2c7o2cRtFcKOUZmMuXzyJTdrOJ3CQAjcaPL8puRsw==",
+  "dgSpecHash": "6QZT2ce9ee8nkoP5ECLSPG3tzrooBceueP1IkB78vePwMrub65cK/Qusy0tTjiMIJpOMNqyRJWh2nwdIIxRkGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rstob\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment\\DataBaseAssignment.csproj",
+  "projectFilePath": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rstob\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\rstob\\.nuget\\packages\\faker.net\\2.0.154\\faker.net.2.0.154.nupkg.sha512",

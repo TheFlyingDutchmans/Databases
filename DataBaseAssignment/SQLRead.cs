@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DataBaseAssignment
 {
-    class SQLDelete
+    class SQLRead
     {
-        public SQLDelete() { }
+        public SQLRead(){}
 
-        public void delete(int entries)
+        public void read(int entries)
         {
             string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
 
@@ -19,6 +19,8 @@ namespace DataBaseAssignment
             MySqlDataAdapter adapter;
 
             conn = new MySqlConnection();
+            cmd = new MySqlCommand();
+            adapter = new MySqlDataAdapter();
 
             int entryValue = entries;
             conn.ConnectionString = ConnectionString;
@@ -26,28 +28,32 @@ namespace DataBaseAssignment
             {
                 Stopwatch stopw = new Stopwatch();
                 stopw.Start();
-                conn.Open();
 
-                for (int i = 0; i < entryValue; i++)
+                for (int i = 0; i < 1; i++)
                 {
-                    cmd = new MySqlCommand();
-                    adapter = new MySqlDataAdapter();
-
+                    conn.Open();
                     cmd.Connection = conn;
-                    cmd.CommandText = "DELETE TOP (" + entryValue + ") FROM user WHERE userID = 1";
-                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "SELECT * FROM user LIMIT " + entryValue;
+                    adapter.SelectCommand = cmd;
+                    using MySqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        Console.WriteLine("{0} {1} {2}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2));
+                    }
+
+                    stopw.Stop();
+                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+                    conn.Close();
+
                 }
-                conn.Close();
-
-                stopw.Stop();
-                Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
-
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            //code
         }
-
+        
     }
 }

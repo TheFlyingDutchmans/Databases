@@ -1056,11 +1056,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rstob\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment\\DataBaseAssignment.csproj",
+      "projectUniqueName": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj",
       "projectName": "DataBaseAssignment",
-      "projectPath": "C:\\Users\\rstob\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment\\DataBaseAssignment.csproj",
+      "projectPath": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj",
       "packagesPath": "C:\\Users\\rstob\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rstob\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment\\obj\\",
+      "outputPath": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

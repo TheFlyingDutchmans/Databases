@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DataBaseAssignment
 {
-    class SQLRead
+    class SQLDelete
     {
-        public SQLRead(){}
+        public SQLDelete() { }
 
-        public void read(int entries)
+        public void delete(int entries)
         {
             string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
 
@@ -19,8 +19,6 @@ namespace DataBaseAssignment
             MySqlDataAdapter adapter;
 
             conn = new MySqlConnection();
-            cmd = new MySqlCommand();
-            adapter = new MySqlDataAdapter();
 
             int entryValue = entries;
             conn.ConnectionString = ConnectionString;
@@ -28,31 +26,33 @@ namespace DataBaseAssignment
             {
                 Stopwatch stopw = new Stopwatch();
                 stopw.Start();
+                conn.Open();
 
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < entryValue; i++)
                 {
-                    conn.Open();
+                    cmd = new MySqlCommand();
+                    adapter = new MySqlDataAdapter();
+
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT * FROM user LIMIT " + entryValue;
-                    adapter.SelectCommand = cmd;
-                    using MySqlDataReader rdr = cmd.ExecuteReader();
 
-                    while (rdr.Read())
-                    {
-                        Console.WriteLine("{0} {1} {2}", rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2));
-                    }
-
-                    stopw.Stop();
-                    Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
-                    conn.Close();
+                    //cmd.CommandText = "DELETE TOP " + "(" + entryValue + ") FROM user";
+                    //cmd.CommandText = "DELETE FROM user WHERE userID = " + i;
+                    cmd.CommandText = "WITH CTE AS(SELECT TOP(" + i + ") t.* FROM user AS t" +
+                        "WHERE  t.userID = " + i + " DELETE FROM CTE";
+                    Console.WriteLine("Delete");
+              
                 }
+                conn.Close();
+
+                stopw.Stop();
+                Console.WriteLine(" Time elapsed: {0} ", stopw.Elapsed);
+
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            //code
         }
-        
+
     }
 }
