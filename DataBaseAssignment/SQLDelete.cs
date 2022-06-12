@@ -19,7 +19,7 @@ namespace DataBaseAssignment
             MySqlDataAdapter adapter;
 
             conn = new MySqlConnection();
-
+            
             int entryValue = entries;
             conn.ConnectionString = ConnectionString;
             try
@@ -28,20 +28,23 @@ namespace DataBaseAssignment
                 stopw.Start();
                 conn.Open();
 
-                for (int i = 0; i < entryValue; i++)
-                {
+             
                     cmd = new MySqlCommand();
                     adapter = new MySqlDataAdapter();
 
                     cmd.Connection = conn;
 
                     //cmd.CommandText = "DELETE TOP " + "(" + entryValue + ") FROM user";
-                    //cmd.CommandText = "DELETE FROM user WHERE userID = " + i;
-                    cmd.CommandText = "WITH CTE AS(SELECT TOP(" + i + ") t.* FROM user AS t" +
-                        "WHERE  t.userID = " + i + " DELETE FROM CTE";
+                    cmd.CommandText = "DELETE FROM user LIMIT @limit";
+                    //cmd.CommandText = "WITH CTE AS(SELECT TOP(" + i + ") t.* FROM user AS t" +
+                    //    "WHERE  t.userID = " + i + " DELETE FROM CTE";
+                    cmd.Parameters.Add("@limit", MySqlDbType.Int64);
+                    cmd.Parameters["@limit"].Value = entryValue;
+
                     Console.WriteLine("Delete");
-              
-                }
+
+                    cmd.ExecuteNonQuery();
+
                 conn.Close();
 
                 stopw.Stop();

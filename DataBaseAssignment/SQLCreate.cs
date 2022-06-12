@@ -13,7 +13,7 @@ namespace DataBaseAssignment
         {
             {
                 string ConnectionString = "server=localhost;uid=root;pwd=;database=databaseassignment;";
-
+                var rand = new Random();
                 MySqlConnection conn;
                 MySqlCommand cmd;
                 MySqlDataAdapter adapter;
@@ -35,6 +35,7 @@ namespace DataBaseAssignment
 
                         cmd.Connection = conn;
                         cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+                        cmd.CommandText = "INSERT INTO userID (userID, firstName, lastName) VALUES (@firstNAme, @lastName) OUTPUT inserted.userID, inserted.firstName INTO profile VALUES (1, ID1), (2, firstName), (3," + rand.Next(1, 4) + ");";
                         //int userID = i;
                         string firstName = Faker.Name.First();
                         string lastName = Faker.Name.Last();
@@ -61,3 +62,10 @@ namespace DataBaseAssignment
         }
     }
 }
+
+
+
+
+
+
+
