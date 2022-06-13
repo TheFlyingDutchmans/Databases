@@ -34,17 +34,46 @@ namespace DataBaseAssignment
                         adapter = new MySqlDataAdapter();
 
                         cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
-                        cmd.CommandText = "INSERT INTO userID (userID, firstName, lastName) VALUES (@firstNAme, @lastName) OUTPUT inserted.userID, inserted.firstName INTO profile VALUES (1, ID1), (2, firstName), (3," + rand.Next(1, 4) + ");";
+
+                        // Create query 1
+                        MySqlCommand cmd1 = new MySqlCommand("INSERT INTO user (firstName, lastName) VALUES (@firstName, @lastName) ");
+
+                        // Bind parameters to query 1
+                        cmd1.Parameters.AddWithValue("@firstName", "John");
+                        cmd1.Parameters.AddWithValue("@lastName", "Doe");
+
+                        // Idk what this does, can't test it :D
+                        // cmd1.CommandType = CommandType.Text;
+
+                        // Execute query 1
+                        int userId = Convert.ToInt32(cmd1.ExecuteScalar());
+
+                        // Create query 2
+                        MySqlCommand cmd2 = new MySqlCommand("INSERT INTO profile (userId, profileName) VALUES (@userId, @profileName)");
+
+                        // Bind parameters to query 2
+                        cmd2.Parameters.AddWithValue("@userId", userId);
+                        cmd2.Parameters.AddWithValue("@profileName", "John Doe");
+                        
+                        /*// Idk what this does, can't test it :D
+                        cmd2.CommandType = CommandType.Text;*/
+
+                        // Execute query 2
+                        cmd2.ExecuteNonQuery();
+
                         //int userID = i;
                         string firstName = Faker.Name.First();
                         string lastName = Faker.Name.Last();
+                        string profileName = Faker.Name.First();
 
                         cmd.Parameters.Add("@firstName", MySqlDbType.String);
                         cmd.Parameters["@firstName"].Value = firstName;
 
                         cmd.Parameters.Add("@lastName", MySqlDbType.String);
                         cmd.Parameters["@lastName"].Value = lastName;
+
+                        cmd.Parameters.Add("@profileName", MySqlDbType.String);
+                        cmd.Parameters["@profileName"].Value = profileName;
 
                         cmd.ExecuteNonQuery();
                     }
@@ -68,4 +97,19 @@ namespace DataBaseAssignment
 
 
 
+/*
+//cmd.CommandText = "CREATE TRIGGER updateTable ON user AFTER INSERT AS BEGIN IF @@ROWCOUNT = 0 RETURN SET NOCOUNT ON; UPDATE profile SET userID FROM user JOIN user profile.userId = user.userID END";
+cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+int lastInsertedID = (int)cmd.ExecuteScalar();
+cmd.CommandText = "INSERT INTO profile (userID, profileName) VALUES (" + lastInsertedID + "@profileName);";
 
+
+//cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+//cmd.CommandText = "INSERT INTO profile (profileName) VALUES (@profileName) (SELECT userID FROM user);";
+
+//cmd.CommandText = "INSERT INTO user (firstName, lastName) OUTPUT inserted.userID INTO profile VALUES (userID);";
+
+
+//cmd.CommandText = "INSERT INTO user(firstName, lastName) OUTPUT inserted.userID, inserted.firstName INTO GeekTable2 VALUES(@firstName, @lastName), (inserted.userID, inserted.firstName)";
+//cmd.CommandText = "INSERT INTO user (FirstName, LastName) VALUES (@firstName, @LastName);";
+//cmd.CommandText = "INSERT INTO profile (profileID, userID, profileName) SELECT userID, firstName FROM user";*/
