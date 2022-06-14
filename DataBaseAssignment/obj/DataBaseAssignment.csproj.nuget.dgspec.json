@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj": {}
+    "C:\\Users\\sikor\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj": {
+    "C:\\Users\\sikor\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj",
+        "projectUniqueName": "C:\\Users\\sikor\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment.csproj",
         "projectName": "DataBaseAssignment",
-        "projectPath": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\DataBaseAssignment.csproj",
-        "packagesPath": "C:\\Users\\rstob\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rstob\\source\\repos\\DataBaseAssignment - kopie - kopie\\DataBaseAssignment\\obj\\",
+        "projectPath": "C:\\Users\\sikor\\Documents\\GitHub\\Databases\\DataBaseAssignment\\DataBaseAssignment.csproj",
+        "packagesPath": "C:\\Users\\sikor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sikor\\Documents\\GitHub\\Databases\\DataBaseAssignment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\rstob\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sikor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[2.0.154, )"
             },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.16.0, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.29, )"
@@ -70,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

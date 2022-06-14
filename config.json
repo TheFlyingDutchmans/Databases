@@ -1,0 +1,66 @@
+[
+  {
+    "database": "netflix",
+    "collection": "subscription",
+    "count": 1000000,
+    "content": {
+      "subscriptionID": {
+        "type": "autoincrement",
+        "autoType": "int"
+      },
+      "userID": {
+        "type": "int",
+        "unique": true,
+        "minInt": 0,
+        "maxInt": 999999
+      },
+      "subscriptionType": {
+        "type": "int",
+        "minInt": 1,
+        "maxInt": 3
+      }
+    }
+  },
+
+  {
+    "database": "netflix",
+    "collection": "user",
+    "count": 1000000,
+    "content": {
+      "userID": {
+        "type": "autoincrement",
+        "autoType": "int"
+      },
+      "firstName": {
+        "type": "faker",
+        "method": "FirstName"
+      },
+      "lastName": {
+        "type": "faker",
+        "method": "LastName"
+      }
+    }
+  },
+
+  {
+    "database": "netflix",
+    "collection": "profile",
+    "count": 1000000,
+    "content": {
+      "profileID": {
+        "type": "autoincrement",
+        "autoType": "int"
+      },
+      "userID": {
+        "type": "int",
+        "unique": true,
+        "minInt": 0,
+        "maxInt": 999999
+      },
+      "profileName": {
+        "type": "faker",
+        "method": "FirstName"
+      }
+    }
+  }
+]

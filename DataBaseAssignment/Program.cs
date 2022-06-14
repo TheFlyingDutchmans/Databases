@@ -25,6 +25,10 @@ namespace DataBaseAssignment
             {
                 Console.WriteLine("Enter [1] for MySQL, [2] for NoSQL and [3] to exit");
                 choose = Convert.ToInt32(Console.ReadLine());
+                while (choose != 1 && choose != 2 && choose != 3)
+                {
+                    choose = Convert.ToInt32(Console.ReadLine());
+                }
                 switch (choose)
                 {
                     case 1:
@@ -33,9 +37,13 @@ namespace DataBaseAssignment
                         Clear();
                         Console.WriteLine("You have selected MySQL, Enter [C] for Create, [R] for Read, [U] for Update and [D] for Delete. [E] for exit ");
                         //Console.ReadLine();
-                        string answer = Console.ReadLine();
+                        string answer = Console.ReadLine().ToUpper();
+                        while (answer != "C" && answer != "R" && answer != "U" && answer != "D" && answer != "E")
+                        {
+                            answer = Console.ReadLine().ToUpper();
+                        }
 
-                        switch (answer.ToUpper())
+                        switch (answer)
                         {
                             case "C":
                                 Console.WriteLine("creating " + entryValue + " entrie(s)");
@@ -71,7 +79,45 @@ namespace DataBaseAssignment
                         break;
 
                     case 2:
-                        Console.WriteLine("Option 2");
+                        int entryValueMongo = databaseSelectEntries();
+
+                        Clear();
+                        Console.WriteLine("You have selected NoSQL, Enter [C] for Create, [R] for Read, [U] for Update and [D] for Delete. [E] for exit ");
+     
+                        string answerMongo = Console.ReadLine().ToUpper();
+                        while (answerMongo != "C" && answerMongo != "R" && answerMongo != "U" && answerMongo != "D" && answerMongo != "E")
+                        {
+                            answerMongo = Console.ReadLine().ToUpper();
+                        }
+                        NoSQL nosql = new NoSQL();
+                        switch (answerMongo)
+                        {
+                            case "C":
+                                Console.WriteLine("creating " + entryValueMongo + " entry(ies)");
+                                nosql.CreateEntry(entryValueMongo);
+                                break;
+                            case "R":
+                                Console.WriteLine("reading " + entryValueMongo + " entry(ies)");
+                                nosql.ReadEntry(entryValueMongo);
+                                break;
+                            case "U":
+                                Console.WriteLine("updating " + entryValueMongo + " entry(ies)");
+                                nosql.UpdateEntry(entryValueMongo);
+                                break;
+                            case "D":
+                                Console.WriteLine("deleting " + entryValueMongo + " entry(ies)");
+                                nosql.DeleteEntry(entryValueMongo);
+                                break;
+                            case "E":
+                                Environment.Exit(0);
+                                break;
+
+                            default:
+                                Console.WriteLine("Invalid entry, try again you must.");
+                                Console.ReadLine();
+                                break;
+                        }
+
                         break;
 
                     case 3:
