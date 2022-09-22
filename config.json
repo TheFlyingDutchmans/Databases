@@ -38,6 +38,20 @@
       "lastName": {
         "type": "faker",
         "method": "LastName"
+      },
+      "profile": {
+        "type": "object",
+        "objectContent": {
+          "profileID": {
+            "type": "int",
+            "minInt": 0,
+            "maxInt": 999999
+          },
+          "profileName": {
+            "type": "faker",
+            "method": "FirstName"
+          }
+        }
       }
     }
   },
@@ -51,15 +65,15 @@
         "type": "autoincrement",
         "autoType": "int"
       },
+      "profileName": {
+        "type": "faker",
+        "method": "FirstName"
+      },
       "userID": {
         "type": "int",
         "unique": true,
         "minInt": 0,
         "maxInt": 999999
-      },
-      "profileName": {
-        "type": "faker",
-        "method": "FirstName"
       }
     }
   }

@@ -49,11 +49,18 @@ namespace DataBaseAssignment
 
             for (int i = 1; i < entries + 1; i++)
             {
+                var newInsertedDocument = new BsonDocument
+                {
+                    {"profileID", 0},
+                    {"profileName", "test" }
+                };
+
                 var newUserDocument = new BsonDocument
                 {
                     {"userID", lastUserID++ },
                     {"firstName", "test" },
-                    {"lastName", "test" }
+                    {"lastName", "test" },
+                    {"profile", newInsertedDocument }
                 };
 
                 var newProfDocument = new BsonDocument
