@@ -1,0 +1,6 @@
+The backups should be created on a separate hardware disk from the one on which the original database is stored.
+
+A full backup of the database should be done every 2 months. When creating a new full backup, the previous full backup should be moved to a folder for past full backups.
+At least 3 full backups should be in the folder of previous backups.
+
+Every day a differential and transactional log backups, based on the latest full backup, should be created.
